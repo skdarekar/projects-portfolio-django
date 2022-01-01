@@ -26,7 +26,10 @@
                         <th>{{project.id}}</th>
                         <td>{{project.title}}</td>
                         <td>{{project.description}}</td>
-                        <td>Edit</td>
+                        <td>
+                            <a href="/projects/{{project.id}}" class="card-link">Details</a>
+                            <a href="/projects/{{project.id}}/update" class="card-link">Edit</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
