@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="container-fluid mt-2">
     <div class="d-flex justify-content-between">
         <h5>Available Projects</h5>
@@ -17,7 +16,7 @@
                         <th scope="col">Project Id</th>
                         <th scope="col">Project Name</th>
                         <th scope="col">Project Description</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +28,7 @@
                         <td>
                             <a href="/projects/{{project.id}}" class="card-link">Details</a>
                             <a href="/projects/{{project.id}}/update" class="card-link">Edit</a>
+                            <a href="/projects/{{project.id}}/delete" class="card-link">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

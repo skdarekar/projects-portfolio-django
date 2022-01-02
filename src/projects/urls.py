@@ -3,12 +3,13 @@ from .views import (project_home_view,
 project_list_view, 
 project_add_view, 
 project_detail_view,
-project_edit_view)
+project_edit_view, project_delete_view)
 
 urlpatterns = [
     path('', project_home_view, name="project-home-view"),
     path('list/', project_list_view, name="project-list-view"),
     path('<int:project_id>', project_detail_view, name="project-detail-view"),
     path('<int:project_id>/update', project_edit_view, name="project-update-view"),
+    path('<int:project_id>/delete', project_delete_view, name="project-delete-view"),
     path('add/', project_add_view, name="project-add-view"),
 ]

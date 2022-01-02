@@ -47,3 +47,13 @@ def project_add_view(request):
         'project_form': form
     }
     return render(request, 'projects/project_add.html', context)
+
+def project_delete_view(request, project_id):
+    projectObj = get_object_or_404(Project, id=project_id);
+    if request.method == "POST":
+        projectObj.delete();
+        return HttpResponseRedirect("/projects/list")
+    context = {
+        'project': projectObj
+    }
+    return render(request, 'projects/project_delete.html', context)
