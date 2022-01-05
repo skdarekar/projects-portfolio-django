@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Please fix the errors and try again!
+        <strong>{{form.errors}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+{% endif %}
+
+<div class="container mt-5">
+    <div class="d-flex mt-2 justify-content-center">
+        <h2>User Registration</h2>
+    </div>
+    <form method="post" class="w-50 m-auto">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}
