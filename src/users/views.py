@@ -44,3 +44,9 @@ def register_user(request):
         'form': form
     });
         
+def forgot_password_user(request):
+    if(request.method == "POST"):
+        #TODO - Add logic to handle reset password here
+        return redirect('/users/login');
+    else:
+        return render(request, 'authenticate/password_reset.html', {});
