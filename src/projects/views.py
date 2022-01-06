@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import (redirect, render, get_object_or_404, HttpResponseRedirect)
+from django.shortcuts import (redirect, render, get_object_or_404, get_list_or_404, HttpResponseRedirect)
 from .models import Project
 from .forms import ProjectForm
 # Create your views here.
@@ -11,8 +11,14 @@ def project_home_view(request):
 
 @login_required
 def project_list_view(request):
-    if(request.user.is_authenticated):
-        query_set = Project.objects.all()
+    user = request.user;
+    if(user.is_authenticated):
+        query_set = {}
+        if(user.is_staff):
+            query_set = Project.objects.all()
+        else:
+            query_set = get_list_or_404(Project, user_id=user.username) #Project.objects.all()
+
         context = {
             'project_list': query_set
         }
@@ -45,12 +51,10 @@ def project_detail_view(request, project_id):
 def project_add_view(request):
     form = ProjectForm(request.POST or None)
     if form.is_valid():
-        form.save()
-        query_set = Project.objects.all()
-        context = {
-            'project_list': query_set
-        }
-        return render(request, 'projects/project_list.html', context)
+        uncommited_form = form.save(commit=False)
+        uncommited_form.user_id = request.user.username
+        uncommited_form.save()
+        return HttpResponseRedirect("/projects/list")
 
     context = {
         'project_form': form
