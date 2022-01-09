@@ -7,7 +7,8 @@ from .forms import ProjectForm
 
 @login_required
 def project_home_view(request):
-    return render(request, 'home.html', {})
+    return redirect("/projects/list")
+    # return render(request, 'home.html', {})
 
 @login_required
 def project_list_view(request):
